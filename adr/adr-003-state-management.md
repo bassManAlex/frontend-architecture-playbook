@@ -1,4 +1,10 @@
-# ADR-003 — State Management
+---
+last-updated: 2026-07-01
+target-stack: Next.js 13/14 (App Router), React 18, React Query, Redux
+status: Accepted
+---
+
+# ADR-003: State Management
 
 ## Status
 
@@ -112,3 +118,61 @@ Negative:
 This is not meant to be a strict rule.
 
 If the application grows, this approach may need adjustments.
+
+---
+
+## Field note: where this decision drifted in practice
+
+A real-world project following this same architecture ended up with server data
+(reference/lookup data fetched from an API) living inside Redux slices, not outside
+global stores as this ADR prescribes. A representative shape (anonymized, field
+names changed):
+
+```ts
+export const fetchReferenceData = createAsyncThunk(
+  "referenceData/fetch",
+  async () => {
+    const response = await referenceDataApi.list();
+    return response.items;
+  },
+  {
+    condition: (_, { getState }) => {
+      const status = (getState() as RootState).referenceDataSlice?.status ?? "idle";
+      return status === "idle" || status === "failed";
+    },
+  },
+);
+
+const referenceDataSlice = createSlice({
+  name: "referenceData",
+  initialState: { data: [], status: "idle" as const, error: undefined as string | undefined },
+  reducers: {
+    invalidate: (state) => { state.status = "idle"; },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchReferenceData.pending, (state) => { state.status = "loading"; })
+      .addCase(fetchReferenceData.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = action.payload;
+      })
+      .addCase(fetchReferenceData.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+  },
+});
+```
+
+This pattern was repeated, nearly identically, across several unrelated slices
+(each one re-implementing `idle/loading/succeeded/failed`, an error string, and a
+manual `condition` guard to avoid refetching). This is the cost this ADR warned
+about under "Trade-offs" ("multiple patterns in the same project... developers
+need to understand when to use each one") showing up as the opposite problem:
+not multiple patterns, but one pattern used outside its intended boundary, copied
+by hand instead of centralized.
+
+Applying this ADR as written would mean this data belongs in the server-state
+layer described in [ADR-004](adr-004-data-fetching.md) (React Query), which
+already provides `idle/loading/success/error` status and refetch-guarding for
+free, removing the need to hand-write it per slice.

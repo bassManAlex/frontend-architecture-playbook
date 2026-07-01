@@ -1,3 +1,9 @@
+---
+last-updated: 2026-07-01
+target-stack: Next.js 13/14 (App Router), React 18
+status: Accepted
+---
+
 # Next.js Multi-Tenant Platform
 
 ## Context
@@ -113,8 +119,8 @@ These were accepted because the alternative (multiple independent apps) would no
 
 ## What worked
 
-- onboarding time for new tenants was significantly reduced
-- shared components improved consistency across applications
+- onboarding time for new tenants went down, though we don't have precise numbers
+- shared components seemed to improve consistency across applications, based on fewer one-off implementations reported by teams
 - teams could reuse existing logic instead of rewriting it
 
 ---

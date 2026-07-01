@@ -1,3 +1,9 @@
+---
+last-updated: 2026-07-01
+target-stack: Next.js 13/14 (App Router), React 18
+status: Accepted
+---
+
 # Scaling a Multi-Tenant Frontend Platform with Next.js
 
 ## Context
@@ -18,8 +24,8 @@ A platform serving 20+ independent government authorities, each requiring:
 
 - Adopted Next.js with SSR for flexibility and performance
 - Introduced a monorepo structure using pnpm workspaces
-- Implemented shared component libraries via git submodules
-- Standardized API route patterns
+- Implemented shared component libraries as pnpm workspace packages
+- Standardized Route Handler patterns
 - Established CI/CD pipelines with strict quality gates
 
 ## Trade-offs
@@ -31,12 +37,12 @@ A platform serving 20+ independent government authorities, each requiring:
 ## Impact
 
 - Platform scaled to 20+ tenants
-- Onboarding time reduced from weeks to days
-- Improved consistency across all applications
-- Enabled distributed teams to work independently
+- Onboarding time went from weeks to days in practice, though we don't have precise per-tenant numbers
+- Consistency across applications improved, based on fewer one-off UI implementations reported by teams
+- Distributed teams were able to work independently on their own tenant configurations
 
 ## Key Takeaways
 
-- Multi-tenant frontend platforms benefit from strong standardization
-- Design systems are critical for scaling teams
-- Architecture must balance flexibility with maintainability
+- Multi-tenant frontend platforms seemed to benefit from strong standardization, based on this project's experience
+- A shared design system helped scaling teams here, though we didn't measure this against an alternative
+- Architecture needs to balance flexibility with maintainability

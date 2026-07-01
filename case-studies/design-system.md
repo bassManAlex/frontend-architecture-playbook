@@ -1,3 +1,9 @@
+---
+last-updated: 2026-07-01
+target-stack: React 18 (framework-agnostic component library)
+status: Accepted
+---
+
 # Design System for Distributed Teams
 
 ## Context
@@ -70,6 +76,31 @@ This prevented the shared layer from becoming too generic.
 
 ---
 
+### Versioning & distribution
+
+Field note from a real-world project following this same approach: the design
+system was published as an ordinary versioned npm package to a private registry
+(GitHub Packages), consumed via a pinned semver range:
+
+```
+@scope/design-system-ui-kit: ^5.22.3
+```
+
+```
+@scope:registry=https://npm.pkg.github.com
+```
+
+It was not distributed as an in-repo workspace package. Consuming
+applications pulled it in the same way they would any third-party dependency,
+including going through a version bump (and a changelog check) to pick up
+changes. This is a meaningfully different trade-off from an in-repo shared
+package: consumers get isolation from unreviewed breaking changes, at the cost
+of every fix requiring a publish-and-bump cycle instead of being immediately
+visible. See also the note on this in
+[ADR-002](../adr/adr-002-modorepo-choice.md#field-note-what-monorepo-meant-in-practice-on-a-real-project).
+
+---
+
 ### Documentation (minimal but necessary)
 
 Documentation was added mainly to:
@@ -102,9 +133,9 @@ This introduced some constraints:
 
 ## What worked
 
-- reduced duplication across projects
-- improved consistency in UI and behavior
-- easier onboarding for new developers
+- duplication across projects went down, though we don't have precise before/after numbers
+- consistency in UI and behavior improved, based on fewer one-off implementations reported by teams
+- onboarding for new developers got easier, in the experience of the teams involved
 - teams could reuse components instead of rebuilding them
 
 ---
