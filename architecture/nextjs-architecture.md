@@ -1,3 +1,9 @@
+---
+last-updated: 2026-07-01
+target-stack: Next.js 13/14 (App Router), React 18
+status: Accepted
+---
+
 # Next.js Frontend Architecture
 
 ## Overview
@@ -36,7 +42,7 @@ This architecture is designed for scalable, multi-tenant frontend platforms usin
 
 ### 1. Application Layer
 
-- Next.js applications (SSR + API routes)
+- Next.js applications (SSR + Route Handlers)
 - Tenant-specific configuration
 - Routing and page composition
 
@@ -48,7 +54,6 @@ This architecture is designed for scalable, multi-tenant frontend platforms usin
 
 Managed via:
 - pnpm workspaces
-- git submodules
 
 ### 3. State Management
 
@@ -57,20 +62,27 @@ Managed via:
 
 ### 4. API Layer
 
-- Next.js API routes
+- Next.js Route Handlers
 - Integration with backend microservices
 
 ### 5. CI/CD
 
 - Automated pipelines
 - Quality gates:
-  - Test coverage (>95%)
+  - Test coverage (>80%), used as a signal, not a hard target. A much higher threshold
+    (e.g. >95%) tends to incentivize tautological tests written to inflate the number
+    rather than to catch real regressions.
+    - Field note: a real-world project following this same rationale settled on a
+      70% threshold across statements/branches/functions/lines, with layout/page
+      shells and test files explicitly excluded from the measurement. That is a
+      concrete data point below the >80% figure above, supporting the same
+      "signal, not target" reasoning.
   - Linting
   - Build validation
 
 ## Key Decisions
 
-- SSR for performance and SEO
+- SSR for control over data loading, not for SEO (pages are behind OIDC authentication and not indexable)
 - Monorepo for code sharing and consistency
 - Design system as a core architectural pillar
 
