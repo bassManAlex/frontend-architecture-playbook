@@ -6,6 +6,8 @@ status: Accepted
 
 # ADR-002: Monorepo
 
+> **Stack note.** This document is a historical record of a completed engagement built on Next.js 13/14 (App Router), pnpm workspaces. It is not a description of current practice; current work uses Next.js 16 and React 19.
+
 ## Status
 
 Accepted
