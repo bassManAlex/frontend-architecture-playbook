@@ -6,6 +6,8 @@ status: Accepted
 
 # Next.js Frontend Architecture
 
+> **Stack note.** This document is a historical record of a completed engagement built on Next.js 13/14 (App Router), React 18. It is not a description of current practice; current work uses Next.js 16 and React 19.
+
 ## Overview
 
 This architecture is designed for scalable, multi-tenant frontend platforms using Next.js and React.
