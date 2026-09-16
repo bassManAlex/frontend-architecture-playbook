@@ -6,6 +6,10 @@ status: Accepted
 
 # Next.js Multi-Tenant Platform
 
+> **Stack note.** This document is a historical record of a completed engagement built on Next.js 13/14 (App Router), React 18. It is not a description of current practice; current work uses Next.js 16 and React 19.
+>
+> **Scope note.** This case study documents a different, larger-scope engagement than other public-sector work referenced elsewhere in this repository. The two should not be read as the same client or the same deployment scope.
+
 ## Context
 
 The platform was built to support multiple public organizations (20+), each with its own operational context but sharing a common frontend foundation.
