@@ -6,6 +6,8 @@ status: Accepted
 
 # Design System for Distributed Teams
 
+> **Stack note.** This document is a historical record of a completed engagement built on React 18 (framework-agnostic component library). It is not a description of current practice; current work uses Next.js 16 and React 19.
+
 ## Context
 
 The design system was introduced in a context where multiple teams were working on related applications, but without a shared UI foundation.
