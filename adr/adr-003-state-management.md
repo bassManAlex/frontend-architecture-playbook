@@ -6,6 +6,8 @@ status: Accepted
 
 # ADR-003: State Management
 
+> **Stack note.** This document is a historical record of a completed engagement built on Next.js 13/14 (App Router), React 18, React Query, Redux. It is not a description of current practice; current work uses Next.js 16 and React 19.
+
 ## Status
 
 Accepted
