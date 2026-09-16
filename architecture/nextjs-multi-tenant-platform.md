@@ -6,6 +6,10 @@ status: Accepted
 
 # Scaling a Multi-Tenant Frontend Platform with Next.js
 
+> **Stack note.** This document is a historical record of a completed engagement built on Next.js 13/14 (App Router), React 18. It is not a description of current practice; current work uses Next.js 16 and React 19.
+>
+> **Scope note.** This document describes a different, larger-scope engagement than other public-sector work referenced elsewhere in this repository. The two should not be read as the same client or the same deployment scope.
+
 ## Context
 
 A platform serving 20+ independent government authorities, each requiring:
