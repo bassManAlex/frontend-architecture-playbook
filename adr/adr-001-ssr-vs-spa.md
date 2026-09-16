@@ -6,6 +6,8 @@ status: Accepted
 
 # ADR-001: SSR vs SPA
 
+> **Stack note.** This document is a historical record of a completed engagement built on Next.js 13/14 (App Router), React 18. It is not a description of current practice; current work uses Next.js 16 and React 19.
+
 ## Status
 
 Accepted
